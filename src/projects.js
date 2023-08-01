@@ -18,7 +18,7 @@ const projects = [
   {
     "id": 3,
     "name": "Star Wars API",
-    "link": "https://swapi-rnogara.vercel.app/",
+    "link": "https://rn-swapi.vercel.app/",
     "img": "https://live.staticflickr.com/65535/53087716418_3ce1ff80b8_m.jpg",
     "score": 5,
     "description": "Projeto feito durante o curso da Trybe e com alterações próprias. Neste projeto foi usado o React, JavaScript, CSS, "
