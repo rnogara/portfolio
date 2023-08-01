@@ -1,0 +1,6 @@
+.arrow-down {
+  animation: flickerArrow 1s linear 2.5s forwards;
+  bottom: 25px;
+  position: absolute;
+  width: 100px;
+}

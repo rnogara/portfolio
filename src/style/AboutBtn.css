@@ -1,0 +1,44 @@
+.about-btn {
+  background-color: transparent;
+  border: none;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 230px;
+  justify-content: center;
+  text-decoration: none;
+  width: 200px;
+}
+
+.about-btn img {
+  animation: flickerBorder 2s linear 0.3s forwards;
+  border: 5px solid white ;
+  border-radius: 50%;
+  height: 100px;
+  margin: 30px 30px 5px;
+}
+
+.about-btn p {
+  color: white;
+  font-size: 30px;
+  letter-spacing: 0.2rem;
+  margin: 0;
+  animation: flickerText 1.5s linear 0.5s infinite alternate;
+}
+
+.about-btn:hover {
+  cursor: pointer;
+}
+
+.about-btn:hover p{
+  animation: none;
+  text-shadow:
+  0 0 4px #fff,
+  0 0 11px #fff,
+  0 0 19px #fff,
+  0 0 40px #0fa,
+  0 0 80px #0fa,
+  0 0 90px #0fa,
+  0 0 100px #0fa,
+  0 0 150px #0fa;
+}

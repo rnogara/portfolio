@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "joao-lemon",
+    "link": "https://www.joaolemon.netlify.com",
+    "score": 7,
+    "description": "Projeto feito durante um curso na Udemy e com alterações próprias. Neste projeto foi usado o React, JavaScript, CSS, "
+  },
+  {
+    "id": 2,
+    "name": "pixels-art",
+    "link": "https://www.pixelsart.netlify.com",
+    "score": 8,
+    "description": "Projeto feito durante o curso da Trybe e com alterações próprias. Neste projeto foi usado o React, JavaScript, CSS, "
+  },
+  {
+    "id": 3,
+    "name": "swapi",
+    "link": "https://www.swapi.netlify.com",
+    "score": 5,
+    "description": "Projeto feito durante o curso da Trybe e com alterações próprias. Neste projeto foi usado o React, JavaScript, CSS, "
+  },
+  {
+    "id": 4,
+    "name": "recipe-app",
+    "link": "https://www.recipe.netlify.com",
+    "score": 5,
+    "description": "Projeto feito durante o curso da Trybe e em grupo. Nesse projeto praticamos as metodologias ágeis, usamos do scrum e do método kanban. Foi usado o React, JavaScript, CSS, "
+  }
+]
