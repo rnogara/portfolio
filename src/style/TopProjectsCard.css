@@ -1,0 +1,35 @@
+.project-cards-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 50px;
+  width: 99%;
+}
+
+.project-card {
+  animation: flickerBorder 2s linear 7s forwards;
+  background-color: white;
+  border: 5px solid white;
+  color: black;
+  display: flex;
+  height: 500px;
+  flex-direction: column;
+}
+
+.project-card-img {
+  height: 340px;
+  max-width: 240px;
+}
+
+.project-card-name {
+  font-size: 20px;
+  margin: 20px;
+}
+
+.project-card-link {
+  color: green;
+  font-size: 34px;
+  margin-top: 30px;
+  text-decoration: none;
+}

@@ -1,0 +1,9 @@
+.title {
+  animation: flickerText 1.5s linear 3.5s forwards;
+  font-size: 90px;
+  font-weight: 300;
+  height: 120px;
+  letter-spacing: 0.3rem;
+  margin: 20px;
+  width: 100%;
+}
