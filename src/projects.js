@@ -26,7 +26,7 @@ const projects = [
   {
     "id": 4,
     "name": "Recipe App",
-    "link": "https://rn-recipe-app.netlify.app/",
+    "link": "https://rn-recipe-app.vercel.app/",
     "img": "https://live.staticflickr.com/65535/53087297231_af154ed23d_m.jpg",
     "score": 9,
     "description": "Projeto feito durante o curso da Trybe e em grupo. Nesse projeto praticamos as metodologias ágeis, usamos do scrum e do método kanban. Foi usado o React, JavaScript, CSS, "
