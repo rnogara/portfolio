@@ -6,7 +6,9 @@ import '../style/TopProjectsCard.css';
 export default function TopProjects() {
   return (
     <div className='project-cards-container'>
-      { projects.sort((a, b) => b.score - a.score).map((project) => ProjectCard(project)) }
+      { projects.sort((a, b) => b.score - a.score).map((project, index) => {
+        return (<ProjectCard project={ project } key={ index } />)
+      })}
     </div>
   )
 }
