@@ -3,7 +3,8 @@ const projects = [
     "id": 1,
     "name": "João Lemon",
     "link": "https://joaolemon.vercel.app/",
-    "img": "https://www.flickr.com/photos/198888785@N06/53120875507/",
+    "img": "https://live.staticflickr.com/65535/53120875507_4ae7e5cb56_z.jpg",
+    "github": "https://github.com/rnogara/JoaoLemon",
     "score": 7,
     "description": "Projeto feito durante um curso na Udemy e com alterações próprias. Neste projeto foi usado o React, JavaScript, CSS, "
   },
@@ -11,7 +12,8 @@ const projects = [
     "id": 2,
     "name": "Pixels Art",
     "link": "https://rn-pixels-art.netlify.app/",
-    "img": "https://www.flickr.com/photos/198888785@N06/53120875517/in/album-72177720310544113/",
+    "img": "https://live.staticflickr.com/65535/53120875517_1fb43c2525_z.jpg",
+    "github": "https://github.com/rnogara/pixels-art",
     "score": 8,
     "description": "Projeto feito durante o curso da Trybe e com alterações próprias. Neste projeto foi usado o React, JavaScript, CSS, "
   },
@@ -19,7 +21,8 @@ const projects = [
     "id": 3,
     "name": "Star Wars API",
     "link": "https://rn-swapi.vercel.app/",
-    "img": "https://www.flickr.com/photos/198888785@N06/53121680614/in/album-72177720310544113/",
+    "img": "https://live.staticflickr.com/65535/53121680614_f529a299ca_z.jpg",
+    "github": "https://github.com/rnogara/swapi",
     "score": 5,
     "description": "Projeto feito durante o curso da Trybe e com alterações próprias. Neste projeto foi usado o React, JavaScript, CSS, "
   },
@@ -27,7 +30,8 @@ const projects = [
     "id": 4,
     "name": "Recipe App",
     "link": "https://rn-recipe-app.vercel.app/",
-    "img": "https://www.flickr.com/photos/198888785@N06/53121680604/in/album-72177720310544113/",
+    "img": "https://live.staticflickr.com/65535/53121680604_163e47d2a2_z.jpg",
+    "github": "https://github.com/rnogara/recipe-app",
     "score": 9,
     "description": "Projeto feito durante o curso da Trybe e em grupo. Nesse projeto praticamos as metodologias ágeis, usamos do scrum e do método kanban. Foi usado o React, JavaScript, CSS, "
   }

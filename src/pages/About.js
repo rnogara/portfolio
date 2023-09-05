@@ -13,7 +13,18 @@ export default class About extends Component {
           <ProfilePicture />
           <ProfileContent />
         </div>
-        <ReturnBtn />
+        <aside className='about-contact'>
+          <a href='mailto:r.nogara.dev@gmail.com' rel='noreferrer noopener'>
+            <img className='about-icons' src='https://img.icons8.com/neon/96/gmail.png' alt='gmail' />
+          </a>
+          <a href='https://www.linkedin.com/in/robertanogara/' target='_blanck' rel='noreferrer noopener'>
+            <img className='about-icons' src='https://img.icons8.com/neon/96/linkedin.png' alt='linkedin' />
+          </a>
+          <a href='https://github.com/rnogara' target='_blanck' rel='noreferrer noopener'>
+            <img className='about-icon-github' src='https://img.icons8.com/nolan/64/github.png' alt='github' />
+          </a>
+        </aside>
+        <ReturnBtn />s
       </section>
     )
   }
