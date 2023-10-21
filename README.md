@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# Portfólio Pessoal de Roberta Nogara
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-## Available Scripts
 
-In the project directory, you can run:
+## Conteudo
 
-### `npm start`
+1. [Sobre](#sobre)
+2. [Link](#link)
+3. [Requisitos do Sistema](#requisitos-do-sistema)
+4. [Instalação](#instalação)
+5. [Como Rodar](#como-rodar)
+6. [Linguagens e Ferramentas](#linguagens-e-ferramentas)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Sobre
 
-### `npm test`
+O Portfólio Pessoal é um espaço onde compartilho meu trabalho e projetos. Este repositório contém o código-fonte do meu portfólio pessoal, que foi construído usando React e CSS.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Link
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+https://rn-portfolio.vercel.app/
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Requisitos do Sistema
 
-### `npm run eject`
+Para executar este portfólio em seu ambiente local, você precisará atender aos seguintes requisitos do sistema:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Node.js (v14 ou superior)
+- npm (gerenciador de pacotes do Node.js)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Instalação
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Para configurar o ambiente de desenvolvimento local, siga estas etapas:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Clone este repositório:
 
-## Learn More
+```bash
+git clone https://github.com/rnogara/portfolio.git
+cd portfolio
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. Instale as dependências do projeto:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm install
+```
 
-### Code Splitting
+## Como Rodar
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Para iniciar o servidor de desenvolvimento e visualizar o seu portfólio, execute o seguinte comando:
 
-### Analyzing the Bundle Size
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Acesse o portfólio no seu navegador em http://localhost:3000.
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Linguagens e Ferramentas
 
-### Advanced Configuration
+As principais linguagens e ferramentas utilizadas neste projeto incluem:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- React
+- CSS
