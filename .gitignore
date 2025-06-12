@@ -1,0 +1,17 @@
+# Dependências
+node_modules
+
+# Ambiente
+.env
+.env.local
+
+# Prisma
+backend/prisma/migrations
+
+# Next.js
+frontend/.next
+frontend/out
+
+# IDE
+.vscode
+.idea
