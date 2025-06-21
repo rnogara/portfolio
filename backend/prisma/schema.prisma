@@ -7,14 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Project {
+model portfolioProject {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  description String
-  tags        String[]
-  imageUrl    String?
-  githubUrl   String?
+  titlePt       String
+  titleEn       String
+  descriptionPt String
+  descriptionEn String
+  technologies  String[]
+  imageUrl    String
+  githubUrl   String
   videoUrl    String?
+  siteUrl     String?
   rate        Int
   createdAt   DateTime @default(now())
+
+  @@map("portfolio_project")
 }
