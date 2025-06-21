@@ -9,7 +9,9 @@ import {
   Put,
   HttpCode,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
+import { AdminGuard } from '../auth/admin.guard';
 import { ContentsService } from './contents.service';
 import { CreateContentDto } from './dto/create-content.dto';
 import { UpdateContentDto } from './dto/update-content.dto';
@@ -30,12 +32,14 @@ export class ContentsController {
 
   @Post('content')
   @HttpCode(HttpStatus.CREATED)
+  @UseGuards(AdminGuard)
   async createContent(@Body() createContentDto: CreateContentDto) {
     return this.contentsService.createContent(createContentDto);
   }
 
   @Put('content/:language')
   @HttpCode(HttpStatus.OK)
+  @UseGuards(AdminGuard)
   async updateContent(
     @Param('language') language: string,
     @Body() updateContentDto: UpdateContentDto,
@@ -51,7 +55,8 @@ export class ContentsController {
   }
 
   @Delete('content/:language')
-  @HttpCode(HttpStatus.OK)
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @UseGuards(AdminGuard)
   async deleteContent(@Param('language') language: string) {
     const content = await this.contentsService.deleteContent(language);
     if (!content) {

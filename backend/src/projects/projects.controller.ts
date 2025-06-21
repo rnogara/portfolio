@@ -9,7 +9,9 @@ import {
   Put,
   Delete,
   HttpCode,
+  UseGuards,
 } from '@nestjs/common';
+import { AdminGuard } from '../auth/admin.guard';
 import { ProjectsService } from './projects.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
@@ -36,6 +38,7 @@ export class ProjectsController {
 
   @Post('projects')
   @HttpCode(HttpStatus.CREATED)
+  @UseGuards(AdminGuard)
   async createProject(@Body() createProjectDto: CreateProjectDto) {
     const project = await this.projectsService.createProject(createProjectDto);
     if (!project) {
@@ -46,23 +49,29 @@ export class ProjectsController {
 
   @Put('projects/:id')
   @HttpCode(HttpStatus.OK)
+  @UseGuards(AdminGuard)
   async updateProject(
     @Param('id') id: string,
     @Body() updateProjectDto: UpdateProjectDto,
   ) {
-    const updatedProject = await this.projectsService.updateProject(
+    const project = await this.projectsService.updateProject(
       id,
       updateProjectDto,
     );
-    if (!updatedProject) {
+    if (!project) {
       throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
     }
-    return updatedProject;
+    return project;
   }
 
   @Delete('projects/:id')
-  @HttpCode(HttpStatus.OK)
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @UseGuards(AdminGuard)
   async deleteProject(@Param('id') id: string) {
-    return this.projectsService.deleteProject(id);
+    const project = await this.projectsService.deleteProject(id);
+    if (!project) {
+      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+    }
+    return project;
   }
 }
