@@ -7,14 +7,99 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Project {
+model PortfolioProject {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  description String
-  tags        String[]
-  imageUrl    String?
-  githubUrl   String?
+  titlePt       String
+  titleEn       String
+  descriptionPt String
+  descriptionEn String
+  technologies  String[]
+  imageUrl    String
+  githubUrl   String
   videoUrl    String?
+  siteUrl     String?
   rate        Int
-  createdAt   DateTime @default(now())
+
+  @@map("portfolio_project")
+}
+
+model PortfolioContent {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  language String @unique
+  home     String
+  menu     String[]
+  projects String
+  
+  // Relacionamentos
+  about    PortfolioContentAbout?   @relation(fields: [aboutId], references: [id])
+  aboutId  String?  @unique @db.ObjectId
+  
+  skills   PortfolioContentSkills?  @relation(fields: [skillsId], references: [id])
+  skillsId String?  @unique @db.ObjectId
+  
+  contact  PortfolioContentContact? @relation(fields: [contactId], references: [id])
+  contactId String? @unique @db.ObjectId
+  
+  @@map("portfolio_content")
+}
+
+model PortfolioContentAbout {
+  id         String       @id @default(auto()) @map("_id") @db.ObjectId
+  story      String
+  experience PortfolioContentExperience[]
+  education  PortfolioContentEducation[]
+  
+  content    PortfolioContent?
+  
+  @@map("portfolio_content_about")
+}
+
+model PortfolioContentExperience {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  company     String
+  title       String
+  periodStart String
+  periodEnd   String
+  description String
+  
+  about   PortfolioContentAbout  @relation(fields: [aboutId], references: [id])
+  aboutId String @db.ObjectId
+  
+  @@map("portfolio_content_experiences")
+}
+
+model PortfolioContentEducation {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  institution String
+  degree      String
+  periodStart String
+  periodEnd   String
+  relevant    String[]
+  
+  about   PortfolioContentAbout  @relation(fields: [aboutId], references: [id])
+  aboutId String @db.ObjectId
+  
+  @@map("portfolio_content_education")
+}
+
+model PortfolioContentSkills {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  tech     String[]
+  tools    String[]
+  concepts String[]
+  soft     String[]
+  content  PortfolioContent?
+  
+  @@map("portfolio_content_skills")
+}
+
+model PortfolioContentContact {
+  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  formName  String      @map("form_name")
+  formEmail String      @map("form_email")
+  formMessage String    @map("form_message")
+  content   PortfolioContent?
+  
+  @@map("portfolio_content_contacts")
 }
