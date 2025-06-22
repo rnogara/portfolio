@@ -24,7 +24,7 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   const fetchContent = async () => {
     try {
       setLoading(true);
-      const response = await api.get<PortfolioContent>('/portfolio');
+      const response = await api.get<PortfolioContent>('/contents');
       setContent(response.data);
     } catch (err) {
       setError('Failed to fetch portfolio data');
