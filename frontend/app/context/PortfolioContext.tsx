@@ -5,7 +5,7 @@ import { PortfolioContent, Project } from '@/app/types';
 import { api } from '@/app/lib/api';
 
 interface PortfolioContextType {
-  content: PortfolioContent | null;
+  content: Record<string, PortfolioContent>;
   projects: Project[];
   loading: boolean;
   error: string | null;
@@ -16,7 +16,7 @@ interface PortfolioContextType {
 const PortfolioContext = createContext<PortfolioContextType | undefined>(undefined);
 
 export function PortfolioProvider({ children }: { children: ReactNode }) {
-  const [content, setContent] = useState<PortfolioContent | null>(null);
+  const [content, setContent] = useState<PortfolioContent[] | null>(null);
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -24,7 +24,7 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   const fetchContent = async () => {
     try {
       setLoading(true);
-      const response = await api.get<PortfolioContent>('/contents');
+      const response = await api.get<PortfolioContent[]>('/contents');
       setContent(response.data);
     } catch (err) {
       setError('Failed to fetch portfolio data');

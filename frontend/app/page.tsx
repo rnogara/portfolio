@@ -1,8 +1,13 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import Background from './components/Background';
+import LanguageBtn from './components/LanguageBtn';
+import { usePortfolio } from '@/app/context/PortfolioContext';
 
 export default function Home() {
+  const { content } = usePortfolio();
+  const contentArray = content ? Object.values(content) : null;
+
   const bgUrls: string[] = [
     '/background/first.jpg',
     '/background/second.jpg',
@@ -10,14 +15,19 @@ export default function Home() {
     '/background/helloWorld.mp4'
   ];
 
+  const [currentLanguage, setCurrentLanguage] = useState<string>('pt-Br');
+
   return (
+    !content ? (
+      <div>Loading...</div>
+    ) : (
     <div className="relative">
       <Background bgUrls={bgUrls} />
+      <LanguageBtn content={contentArray} setLanguage={setCurrentLanguage} />
       <div className="content">
         <div className="section" style={{ height: '100vh' }}>
           <div className="section-content">
-            <h2>Section 1</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec metus vel ante tincidunt placerat.</p>
+            <h2>{content?.[currentLanguage]?.home || ''}</h2>
           </div>
         </div>
         <div className="section z-0" style={{ height: '170vh' }}>
@@ -40,5 +50,6 @@ export default function Home() {
         </div>
       </div>
     </div>
+    ) 
   );
 }
