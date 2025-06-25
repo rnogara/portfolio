@@ -30,6 +30,16 @@ export class ContentsController {
     return content;
   }
 
+  @Get()
+  @HttpCode(HttpStatus.OK)
+  async getAllLanguages() {
+    const content = await this.contentsService.getAllLanguages();
+    if (!content) {
+      throw new HttpException('Content not found', HttpStatus.NOT_FOUND);
+    }
+    return content;
+  }
+
   @Post('')
   @HttpCode(HttpStatus.CREATED)
   @UseGuards(AdminGuard)
@@ -44,10 +54,10 @@ export class ContentsController {
     @Param('language') language: string,
     @Body() updateContentDto: UpdateContentDto,
   ) {
-    const content = await this.contentsService.updateContent({
-      ...updateContentDto,
+    const content = await this.contentsService.updateContent(
       language,
-    });
+      updateContentDto,
+    );
     if (!content) {
       throw new HttpException('Content not found', HttpStatus.NOT_FOUND);
     }

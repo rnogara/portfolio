@@ -29,6 +29,7 @@ model PortfolioContent {
   home     String
   menu     String[]
   projects String
+  icon     String
   
   // Relacionamentos
   about    PortfolioContentAbout?   @relation(fields: [aboutId], references: [id])

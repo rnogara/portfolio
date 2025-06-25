@@ -31,6 +31,7 @@ export interface PortfolioContent {
   home: string;
   menu: string[];
   projects: string;
+  icon: string;
   about?: {
     story: string;
     experience: Experience[];
@@ -66,6 +67,11 @@ export interface Education {
   periodStart: string;
   periodEnd: string;
   relevant: string[];
+}
+
+export interface Language {
+  language: string;
+  icon: string;
 }
 
 export interface AdminCredentials {
