@@ -11,6 +11,7 @@ interface PortfolioContextType {
   projects: Project[];
   loading: boolean;
   error: string | null;
+  currentLanguage: string;
   refreshContent: (language: string) => Promise<void>;
   refreshProjects: () => Promise<void>;
 }
@@ -23,12 +24,27 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [languages, setLanguages] = useState<Language[]>([]);
+  const [currentLanguage, setCurrentLanguage] = useState<string>('');
+
+  const fetchLanguages = async () => {
+    try {
+      setLoading(true);
+      const response = await api.get<Language[]>('/contents');
+      setLanguages(response.data);
+    } catch (err) {
+      setError('Failed to fetch languages');
+      console.error('Error fetching languages:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const fetchContent = async (language: string) => {
     try {
       setLoading(true);
-      const response = await api.get<PortfolioContent>('/contents', { params: { language } });
+      const response = await api.get<PortfolioContent>(`/contents/${language}`);
       setContent(response.data);
+      setCurrentLanguage(language);
     } catch (err) {
       setError('Failed to fetch portfolio data');
       console.error('Error fetching portfolio:', err);
@@ -50,36 +66,49 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const fetchLanguages = async () => {
-    try {
-      setLoading(true);
-      const response = await api.get<Language[]>('/contents');
-      setLanguages(response.data);
-    } catch (err) {
-      setError('Failed to fetch languages');
-      console.error('Error fetching languages:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const checkAllImagesLoaded = () => {
+      const images = document.querySelectorAll('img');
+      if (images.length === 0) return true;
+      
+      return Array.from(images).every(img => img.complete);
+    };
+
+    const waitForImages = () => {
+      return new Promise<void>((resolve) => {
+        const check = () => {
+          if (checkAllImagesLoaded()) {
+            resolve();
+          } else {
+            setTimeout(check, 100);
+          }
+        };
+        check();
+      });
+    };
+
     const initializeContent = async () => {
       try {
+        setLoading(true);
         const userLanguage = await detectUserLanguage();
         await Promise.all([
           fetchContent(userLanguage),
           fetchProjects(),
           fetchLanguages()
         ]);
+
+        // Wait for all images to load
+        await waitForImages();
       } catch (error) {
         console.error('Error initializing content:', error);
-        // Fallback para português em caso de erro
+        // Fallback to English in case of error
         await Promise.all([
-          fetchContent('pt-BR'),
+          fetchContent('en'),
           fetchProjects(),
           fetchLanguages()
         ]);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -102,6 +131,7 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
         languages,
         loading,
         error,
+        currentLanguage,
         refreshContent,
         refreshProjects,
       }}

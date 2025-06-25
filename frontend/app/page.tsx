@@ -1,8 +1,10 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import Background from './components/Background';
 import LanguageBtn from './components/LanguageBtn';
 import { usePortfolio } from '@/app/context/PortfolioContext';
+import HomeContent from './components/HomeContent';
+import Typewriter from './components/Typewriter';
 
 export default function Home() {
   const { content } = usePortfolio();
@@ -14,22 +16,17 @@ export default function Home() {
     '/background/helloWorld.mp4'
   ];
 
-  const [currentLanguage, setCurrentLanguage] = useState<string>('pt-Br');
-
   return (
     !content ? (
-      <div>Loading...</div>
+      <div className='w-full h-screen flex items-center justify-center z-50 text-2xl bg-black text-white font-[Orbitron] text-shadow-md'>
+        <Typewriter strings={['Loading...']} loop={false} typingSpeed={10} />
+      </div>
     ) : (
     <div className="relative">
       <Background bgUrls={bgUrls} />
-      <LanguageBtn currentLanguage={currentLanguage} setCurrentLanguage={setCurrentLanguage} />
       <div className="content">
-        <div className="section" style={{ height: '100vh' }}>
-          <div className="section-content">
-            <h2>Section 1</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec metus vel ante tincidunt placerat.</p>
-          </div>
-        </div>
+        <LanguageBtn />
+        <HomeContent homeContent={content.home} />
         <div className="section z-0" style={{ height: '170vh' }}>
           <div className="section-content">
             <h2>Section 2</h2>
