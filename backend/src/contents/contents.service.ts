@@ -7,16 +7,41 @@ import { UpdateContentDto } from './dto/update-content.dto';
 export class ContentsService {
   constructor(private prisma: PrismaService) {}
 
-  async getContent(language: string = 'pt-BR') {
-    const content = this.prisma.portfolioContent.findUnique({
+  async getContent(language: string) {
+    const content = await this.prisma.portfolioContent.findUnique({
       where: { language },
+      select: {
+        language: true,
+        home: true,
+        menu: true,
+        projects: true,
+        icon: true,
+        about: {
+          include: {
+            experience: true,
+            education: true,
+          },
+        },
+        skills: true,
+        contact: true,
+      },
     });
     return content;
   }
 
-  async updateContent(updateContentDto: UpdateContentDto) {
+  async getAllLanguages() {
+    const languages = await this.prisma.portfolioContent.findMany({
+      select: {
+        language: true,
+        icon: true,
+      },
+    });
+    return languages;
+  }
+
+  async updateContent(language: string, updateContentDto: UpdateContentDto) {
     return this.prisma.portfolioContent.update({
-      where: { language: updateContentDto.language },
+      where: { language },
       data: updateContentDto,
     });
   }

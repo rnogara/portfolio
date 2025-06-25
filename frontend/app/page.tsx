@@ -6,7 +6,6 @@ import { usePortfolio } from '@/app/context/PortfolioContext';
 
 export default function Home() {
   const { content } = usePortfolio();
-  const contentArray = content ? Object.values(content) : null;
 
   const bgUrls: string[] = [
     '/background/first.jpg',
@@ -23,11 +22,12 @@ export default function Home() {
     ) : (
     <div className="relative">
       <Background bgUrls={bgUrls} />
-      <LanguageBtn content={contentArray} setLanguage={setCurrentLanguage} />
+      <LanguageBtn currentLanguage={currentLanguage} setCurrentLanguage={setCurrentLanguage} />
       <div className="content">
         <div className="section" style={{ height: '100vh' }}>
           <div className="section-content">
-            <h2>{content?.[currentLanguage]?.home || ''}</h2>
+            <h2>Section 1</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec metus vel ante tincidunt placerat.</p>
           </div>
         </div>
         <div className="section z-0" style={{ height: '170vh' }}>
