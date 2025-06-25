@@ -218,6 +218,21 @@ html {
   scrollbar-width: none;  /* Firefox */
 }
 
+.typewriter {
+  display: inline-block;
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  background-color: currentColor;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 @media (max-width: 768px) {
   .section h2 {
       font-size: 2.5rem;

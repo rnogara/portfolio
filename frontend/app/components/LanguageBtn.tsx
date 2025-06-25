@@ -5,26 +5,31 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { usePortfolio } from '../context/PortfolioContext';
 import { Language } from '../types';
 
-interface LanguageBtnProps {
-  currentLanguage: string;
-  setCurrentLanguage: (language: string) => void;
-}
+const LanguageBtn = () => {
+  const { languages, refreshContent, loading, currentLanguage } = usePortfolio();
 
-const LanguageBtn = ({ currentLanguage, setCurrentLanguage }: LanguageBtnProps) => {
-  const { languages, refreshContent } = usePortfolio();
+  if (loading) {
+    return (
+      <div className='fixed top-2 right-2 md:top-4 md:right-6 z-50 w-8 h-8 md:w-12 md:h-12 rounded-full bg-gray-200 animate-pulse' />
+    );
+  }
 
   const languageOptions = languages.filter((language: Language) => language.language !== currentLanguage);
-
   const currentLanguageData = languages.find((language: Language) => language.language === currentLanguage);
-  const currentIcon = currentLanguageData?.icon;
 
-  if (!currentIcon) {
+  if (languages.length === 0 || !currentLanguageData) {
+    console.warn('No languages available or current language not found');
     return null;
   }
 
-  const handleLanguageChange = async (language: string) => {
-    refreshContent(language);
-    setCurrentLanguage(language);
+  const currentIcon = currentLanguageData.icon;
+
+  if (!currentIcon) {
+    return (
+      <div className='fixed top-2 right-2 md:top-4 md:right-6 z-50 w-8 h-8 md:w-12 md:h-12 rounded-full bg-gray-200 flex items-center justify-center'>
+        <span className='text-xs'>{currentLanguageData.language.substring(0, 2).toUpperCase()}</span>
+      </div>
+    );
   }
 
   return (
@@ -41,7 +46,7 @@ const LanguageBtn = ({ currentLanguage, setCurrentLanguage }: LanguageBtnProps) 
           {languageOptions.map((language: Language) => (
             <DropdownMenuItem 
               key={language.language} 
-              onClick={() => handleLanguageChange(language.language)}
+              onClick={() => refreshContent(language.language)}
               className="p-0 md:p-2"
             >
               <Image 

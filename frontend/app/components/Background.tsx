@@ -152,7 +152,7 @@ export default function Background({ bgUrls }: BackgroundProps) {
         }}
       >
         <video 
-          ref={el => videoRefs.current[0] = el} 
+          ref={el => {videoRefs.current[0] = el}} 
           src={bgUrls[2]} 
           loop 
           muted 
@@ -172,7 +172,7 @@ export default function Background({ bgUrls }: BackgroundProps) {
         }}
       >
         <video 
-          ref={el => videoRefs.current[1] = el} 
+          ref={el => {videoRefs.current[1] = el}} 
           src={bgUrls[3]} 
           loop 
           muted 

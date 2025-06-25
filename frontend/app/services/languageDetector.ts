@@ -64,7 +64,7 @@ export const detectUserLanguage = async (): Promise<'pt-BR' | 'en'> => {
     }
   }
   
-  return 'pt-BR';
+  return 'en';
 };
 
 export type LanguageCode = 'pt-BR' | 'en';
