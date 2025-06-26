@@ -33,6 +33,10 @@ export interface PortfolioContent {
   projects: string;
   icon: string;
   about?: {
+    title: string;
+    educationBtn: string;
+    experienceBtn: string;
+    cvUrl: string;
     story: string;
     experience: Experience[];
     education: Education[];

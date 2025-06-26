@@ -46,6 +46,11 @@ model PortfolioContent {
 
 model PortfolioContentAbout {
   id         String       @id @default(auto()) @map("_id") @db.ObjectId
+  title    String
+  educationBtn String
+  experienceBtn String
+  cvUrl String
+
   story      String
   experience PortfolioContentExperience[]
   education  PortfolioContentEducation[]

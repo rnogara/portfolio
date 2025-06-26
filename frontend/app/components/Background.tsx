@@ -29,28 +29,28 @@ export default function Background({ bgUrls }: BackgroundProps) {
     // Calculate opacities based on scroll position
     // First background - fade out only after second background is fully visible
     let firstBgOpacity = 1;
-    if (scrollY >= windowHeight * 0.8) {
-      firstBgOpacity = 1 - ((scrollY - windowHeight * 0.8) / (windowHeight * 0.2));
+    if (scrollY >= windowHeight * 0.4) {
+      firstBgOpacity = 1 - ((scrollY - windowHeight * 0.4) / (windowHeight * 0.2));
       firstBgOpacity = Math.max(0, firstBgOpacity);
     }
     
     // Second background - fade in during the transition
     let secondBgOpacity = 0;
-    if (scrollY >= windowHeight * 0.8) {
-      secondBgOpacity = Math.min(1, (scrollY - windowHeight * 0.8) / (windowHeight * 0.2));
+    if (scrollY >= windowHeight * 0.4) {
+      secondBgOpacity = Math.min(1, (scrollY - windowHeight * 0.4) / (windowHeight * 0.2));
     }
     
     // Matrix video - from section 2 to section 3
     let matrixOpacity = 0;
     if (scrollY >= windowHeight * 1.5 && scrollY < windowHeight * 2.0) {
       // Fade in during second half of section 2
-      matrixOpacity = Math.min(Math.max((scrollY - windowHeight * 1.5) / (windowHeight * 0.5), 0), 0.6);
+      matrixOpacity = Math.min(Math.max((scrollY - windowHeight * 1.5) / (windowHeight * 0.5), 0), 0.4);
     } else if (scrollY >= windowHeight * 2.0 && scrollY < windowHeight * 3.0) {
       // Stay visible in section 3
-      matrixOpacity = 0.6;
+      matrixOpacity = 0.4;
     } else if (scrollY >= windowHeight * 3.0) {
       // Fade out at start of section 4
-      matrixOpacity = Math.max(0, 0.6 - ((scrollY - windowHeight * 3.0) / (windowHeight * 0.5)));
+      matrixOpacity = Math.max(0, 0.4 - ((scrollY - windowHeight * 3.0) / (windowHeight * 0.5)));
     }
     
     // Hello World video - only in section 4, fully opaque
