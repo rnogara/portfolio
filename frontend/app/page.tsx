@@ -5,6 +5,7 @@ import LanguageBtn from './components/LanguageBtn';
 import { usePortfolio } from '@/app/context/PortfolioContext';
 import HomeContent from './components/HomeContent';
 import Typewriter from './components/Typewriter';
+import About from './components/About';
 
 export default function Home() {
   const { content } = usePortfolio();
@@ -27,12 +28,7 @@ export default function Home() {
       <div className="content">
         <LanguageBtn />
         <HomeContent homeContent={content.home} />
-        <div className="section z-0" style={{ height: '170vh' }}>
-          <div className="section-content">
-            <h2>Section 2</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec metus vel ante tincidunt placerat.</p>
-          </div>
-        </div>
+        <About aboutContent={content.about} />
         <div className="section" style={{ height: '100vh' }}>
           <div className="section-content">
             <h2>Section 3</h2>
