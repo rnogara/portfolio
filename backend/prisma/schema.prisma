@@ -13,6 +13,8 @@ model PortfolioProject {
   titleEn       String
   descriptionPt String
   descriptionEn String
+  technologiesTitlePt String
+  technologiesTitleEn String
   technologies  String[]
   imageUrl    String
   githubUrl   String

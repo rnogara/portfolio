@@ -1,8 +1,8 @@
 import React from 'react';
-import { PortfolioContent } from '../../types';
+import { PortfolioContent } from '../../../types';
 import Education from './Education';
 import Experience from './Experience';
-import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle } from '../dialog';
+import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle } from '../../ui/dialog';
 import DownloadCV from './DownloadCV';
 
 const About = ({ aboutContent }: { aboutContent: PortfolioContent['about'] }) => {
@@ -12,7 +12,7 @@ const About = ({ aboutContent }: { aboutContent: PortfolioContent['about'] }) =>
     !aboutContent ? (
       <div>...</div>
     ) : (
-    <div className='max-w-full h-fit flex items-center justify-center z-10 mt-60'>
+    <div className='max-w-full h-[100vh] flex items-center justify-center z-10 mt-20'>
       <div className='w-[90%] h-auto bg-black/20 flex flex-col justify-center z-10 p-6 gap-4 rounded-lg text-gray-200 font-[Jura] overflow-hidden'>
         <h2 className='text-center text-[1.5rem] md:text-[2rem] lg:text-[3rem] font-[Orbitron] text-shadow-md'>{aboutContent.title}</h2>
         {story?.map((line, index) => (

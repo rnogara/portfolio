@@ -4,6 +4,10 @@ export interface Project {
   titleEn: string;
   descriptionPt: string;
   descriptionEn: string;
+  moreBtnPt: string;
+  moreBtnEn: string;
+  technologiesTitlePt: string;
+  technologiesTitleEn: string;
   technologies: string[];
   imageUrl: string;
   githubUrl: string;

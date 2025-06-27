@@ -1,5 +1,5 @@
 import React from 'react';
-import Typewriter from './Typewriter';
+import Typewriter from '../ui/Typewriter';
 
 const HomeContent = ({ homeContent }: { homeContent: string }) => {
   const processedContent = homeContent.replace(/\\n/g, '\n');
