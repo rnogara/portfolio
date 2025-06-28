@@ -23,6 +23,14 @@ export class CreateProjectDto {
   @IsNotEmpty()
   descriptionEn: string;
 
+  @IsString()
+  @IsNotEmpty()
+  technologiesTitlePt: string;
+
+  @IsString()
+  @IsNotEmpty()
+  technologiesTitleEn: string;
+
   @IsArray()
   @ArrayMinSize(1)
   @IsString({ each: true })

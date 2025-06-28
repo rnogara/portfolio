@@ -1,9 +1,9 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './dropdown-menu';
-import { usePortfolio } from '../context/PortfolioContext';
-import { Language } from '../types';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
+import { usePortfolio } from '../../context/PortfolioContext';
+import { Language } from '../../types';
 
 const LanguageBtn = () => {
   const { languages, refreshContent, loading, currentLanguage } = usePortfolio();

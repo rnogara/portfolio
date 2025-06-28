@@ -1,5 +1,5 @@
 import React from 'react'
-import { Experience as ExperienceType } from '../../types'
+import { Experience as ExperienceType } from '../../../types'
 
 const Experience = ({experience}: {experience: ExperienceType[]}) => {
   const experienceSorted = experience.sort((a, b) => new Date(b.periodStart).getTime() - new Date(a.periodStart).getTime());
