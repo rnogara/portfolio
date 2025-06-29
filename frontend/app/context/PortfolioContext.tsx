@@ -1,14 +1,18 @@
 'use client';
 
 import { createContext, useContext, ReactNode, useState, useEffect } from 'react';
-import { Language, PortfolioContent, Project } from '@/app/types';
+import { Language, PortfolioContent, Project, SvglApiResponse, WakaTimeLanguage } from '@/app/types';
 import { api } from '@/app/lib/api';
 import { detectUserLanguage } from '@/app/services/languageDetector';
+import fetchJsonp from 'fetch-jsonp';
+import { useTheme } from './theme';
 
 interface PortfolioContextType {
   content: PortfolioContent | undefined;
-  languages: Language[];
+  wakaTimeData: WakaTimeLanguage[];
+  languages: Language[] | undefined;
   projects: Project[];
+  skillIcons: Map<string, string | null>;
   loading: boolean;
   error: string | null;
   currentLanguage: string;
@@ -21,10 +25,13 @@ const PortfolioContext = createContext<PortfolioContextType | undefined>(undefin
 export function PortfolioProvider({ children }: { children: ReactNode }) {
   const [content, setContent] = useState<PortfolioContent>();
   const [projects, setProjects] = useState<Project[]>([]);
+  const [skillIcons, setSkillIcons] = useState<Map<string, string>>(new Map());
+  const [wakaTimeData, setWakaTimeData] = useState<WakaTimeLanguage[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [languages, setLanguages] = useState<Language[]>([]);
+  const [languages, setLanguages] = useState<Language[]>();
   const [currentLanguage, setCurrentLanguage] = useState<string>('');
+  const { theme } = useTheme();
 
   const fetchLanguages = async () => {
     try {
@@ -45,11 +52,30 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
       const response = await api.get<PortfolioContent>(`/contents/${language}`);
       setContent(response.data);
       setCurrentLanguage(language);
+      return response.data;
     } catch (err) {
       setError('Failed to fetch portfolio data');
       console.error('Error fetching portfolio:', err);
+      return null;
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchAllSkillIcons = async () => {
+    try {
+      const response = await api.get<SvglApiResponse[]>('/skills/icons/all');
+      const iconMap = new Map(
+        response.data.map(item => {
+          if (typeof item.route === 'string') {
+            return [item.title.toLowerCase(), item.route];
+          }
+          return [item.title.toLowerCase(), item.route.dark];
+        })
+      );
+    setSkillIcons(iconMap);
+    } catch (error) {
+      console.error('Error fetching all skill icons:', error);
     }
   };
 
@@ -63,6 +89,25 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
       console.error('Error fetching projects:', err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchWakaTimeData = async () => {
+    const wakatimeUrl = process.env.NEXT_PUBLIC_WAKATIME_URL;
+    if (!wakatimeUrl) {
+      console.error('WAKATIME_URL is not defined in environment variables.');
+      return;
+    }
+
+    try {
+      const response = await fetchJsonp(wakatimeUrl, {
+        timeout: 5000,
+      });
+      const data = await response.json();
+      setWakaTimeData(data.data);
+    } catch (err) {
+      setError((prevError) => prevError ? `${prevError}, Failed to fetch WakaTime data` : 'Failed to fetch WakaTime data');
+      console.error('Error fetching WakaTime data:', err);
     }
   };
 
@@ -91,29 +136,33 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
       try {
         setLoading(true);
         const userLanguage = await detectUserLanguage();
-        await Promise.all([
-          fetchContent(userLanguage),
-          fetchProjects(),
-          fetchLanguages()
-        ]);
+        const initialContent = await fetchContent(userLanguage)
+
+        if (initialContent) {
+            await Promise.all([
+                fetchProjects(),
+                fetchLanguages(),
+                fetchWakaTimeData(),
+                fetchAllSkillIcons(),
+            ]);
+        }
 
         // Wait for all images to load
         await waitForImages();
       } catch (error) {
         console.error('Error initializing content:', error);
         // Fallback to English in case of error
-        await Promise.all([
-          fetchContent('en'),
-          fetchProjects(),
-          fetchLanguages()
-        ]);
+        const fallbackContent = await fetchContent('en')
+        if(fallbackContent) {
+            await Promise.all([fetchProjects(), fetchLanguages(), fetchWakaTimeData(), fetchAllSkillIcons()]);
+        }
       } finally {
         setLoading(false);
       }
     };
 
     initializeContent();
-  }, []);
+  }, [theme]);
 
   const refreshContent = async (language: string) => {
     await fetchContent(language);
@@ -127,6 +176,8 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
     <PortfolioContext.Provider
       value={{
         content,
+        wakaTimeData,
+        skillIcons,
         projects,
         languages,
         loading,

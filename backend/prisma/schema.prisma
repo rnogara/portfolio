@@ -92,10 +92,13 @@ model PortfolioContentEducation {
 
 model PortfolioContentSkills {
   id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  title    String
   tech     String[]
   tools    String[]
   concepts String[]
   soft     String[]
+  chartTitle String
+  
   content  PortfolioContent?
   
   @@map("portfolio_content_skills")
