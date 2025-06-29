@@ -7,6 +7,7 @@ import HomeContent from './components/templates/HomeContent';
 import Typewriter from './components/ui/Typewriter';
 import About from './components/templates/About';
 import Projects from './components/templates/Projects';
+import Skills from './components/templates/Skills';
 
 export default function Home() {
   const { content } = usePortfolio();
@@ -30,6 +31,7 @@ export default function Home() {
         <LanguageBtn />
         <HomeContent homeContent={content.home} />
         <About aboutContent={content.about} />
+        <Skills skillsContent={content.skills} />
         <Projects title={content.projects} />
       </main>
     </div>

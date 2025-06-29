@@ -46,10 +46,12 @@ export interface PortfolioContent {
     education: Education[];
   };
   skills?: {
+    title: string;
     tech: string[];
     tools: string[];
     concepts: string[];
     soft: string[];
+    chartTitle: string;
   };
   contact?: {
     title: string;
@@ -93,4 +95,33 @@ export interface ErrorMessage {
       message: string
     }
   }
+}
+
+export interface WakaTimeLanguage {
+  color: string;
+  decimal: string;
+  digital: string;
+  hours: number;
+  minutes: number;
+  name: string;
+  percent: number;
+  text: string;
+  total_seconds: number;
+}
+
+export interface SvglApiResponse {
+  id: number;
+  title: string;
+  category: string;
+  route: {
+    light: string;
+    dark: string;
+  } | string;
+  wordmark?:
+    | {
+        light: string;
+        dark: string;
+      }
+    | string;
+  url: string;
 }
