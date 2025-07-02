@@ -53,7 +53,7 @@ model PortfolioContentAbout {
   experienceBtn String
   cvUrl String
 
-  story      String
+  cvBtn      String
   experience PortfolioContentExperience[]
   education  PortfolioContentEducation[]
   
@@ -110,6 +110,20 @@ model PortfolioContentContact {
   formName  String      @map("form_name")
   formEmail String      @map("form_email")
   formMessage String    @map("form_message")
+  formButton String    @map("form_button")
+  formLabelName String    @map("form_label_name")
+  formLabelEmail String    @map("form_label_email")
+  formLabelMessage String   @map("form_label_message")
+  formNameError String     @map("form_name_error")
+  formEmailError String    @map("form_email_error")
+  formMessageError String  @map("form_message_error")
+  formSuccess String?       @map("form_success")
+  formError String?         @map("form_error")
+  linkedin  String
+  github    String
+  email     String
+  phone     String
+  
   content   PortfolioContent?
   
   @@map("portfolio_content_contacts")

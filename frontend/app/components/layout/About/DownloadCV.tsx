@@ -4,12 +4,13 @@ interface DownloadCVProps {
   cvUrl: string;
   className?: string;
   children?: React.ReactNode;
+  cvBtn?: string;
 }
 
 const DownloadCV: React.FC<DownloadCVProps> = ({ 
-  cvUrl, 
+  cvUrl,
+  cvBtn, 
   className = 'border border-white p-2 rounded-lg hover:bg-white hover:text-black transition-colors cursor-pointer font-[Jura] text-[1rem] font-bold md:text-xl text-shadow-md',
-  children = 'Download CV' 
 }) => {
   const handleDownloadCV = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -33,7 +34,7 @@ const DownloadCV: React.FC<DownloadCVProps> = ({
       className={className}
       aria-label="Download Curriculum Vitae"
     >
-      {children}
+      {cvBtn}
     </button>
   );
 };

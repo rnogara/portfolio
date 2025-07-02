@@ -1,13 +1,14 @@
 'use client';
 import React from 'react';
-import Background from './components/layout/Background';
-import LanguageBtn from './components/layout/LanguageBtn';
+import Background from './components/templates/Background';
+import LanguageBtn from './components/templates/LanguageBtn';
 import { usePortfolio } from '@/app/context/PortfolioContext';
-import HomeContent from './components/templates/HomeContent';
+import HomeContent from './components/layout/HomeContent';
 import Typewriter from './components/ui/Typewriter';
-import About from './components/templates/About';
-import Projects from './components/templates/Projects';
-import Skills from './components/templates/Skills';
+import About from './components/layout/About';
+import Projects from './components/layout/Projects';
+import Skills from './components/layout/Skills';
+import Contact from './components/layout/Contact';
 
 export default function Home() {
   const { content } = usePortfolio();
@@ -33,6 +34,7 @@ export default function Home() {
         <About aboutContent={content.about} />
         <Skills skillsContent={content.skills} />
         <Projects title={content.projects} />
+        <Contact contactContent={content.contact} />
       </main>
     </div>
     ) 

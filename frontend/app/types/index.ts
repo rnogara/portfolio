@@ -41,7 +41,7 @@ export interface PortfolioContent {
     educationBtn: string;
     experienceBtn: string;
     cvUrl: string;
-    story: string;
+    cvBtn: string;
     experience: Experience[];
     education: Education[];
   };
@@ -58,6 +58,19 @@ export interface PortfolioContent {
     formName: string;
     formEmail: string;
     formMessage: string;
+    formButton: string;
+    formSuccess: string;
+    formError: string;
+    formLabelName: string;
+    formLabelEmail: string;
+    formLabelMessage: string;
+    formNameError: string;
+    formEmailError: string;
+    formMessageError: string;
+    github: string;
+    linkedin: string;
+    email: string;
+    phone: string;
   };
 }
 
