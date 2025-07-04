@@ -10,7 +10,7 @@ interface DownloadCVProps {
 const DownloadCV: React.FC<DownloadCVProps> = ({ 
   cvUrl,
   cvBtn, 
-  className = 'border border-white p-2 rounded-lg hover:bg-white hover:text-black transition-colors cursor-pointer font-[Jura] text-[1rem] font-bold md:text-xl text-shadow-md',
+  className,
 }) => {
   const handleDownloadCV = (e: React.MouseEvent) => {
     e.preventDefault();

@@ -51,7 +51,7 @@ const ContactForm = ({ contactContent }: { contactContent: PortfolioContent['con
               <FormItem>
                 <FormLabel className='text-green-400 pl-2 text-[1rem] font-[Orbitron]'>{contactContent?.formLabelName}</FormLabel>
                 <FormControl>
-                  <Input placeholder={contactContent?.formName} {...field} className='border-green-400 text-green-400 placeholder:text-green-400/50 h-10 bg-black' />
+                  <Input placeholder={contactContent?.formName} {...field} className='text-[0.75rem] md:text-[1rem] border-green-400 text-green-400 placeholder:text-green-400/50 h-10 bg-black' />
                 </FormControl>
                 {form.formState.errors.name && <p className='font-bold text-red-400 text-sm pt-1 pl-1'>{contactContent?.formNameError}</p>}
               </FormItem>
@@ -64,7 +64,7 @@ const ContactForm = ({ contactContent }: { contactContent: PortfolioContent['con
               <FormItem>
                 <FormLabel className='text-green-400 pl-2 text-[1rem] font-[Orbitron]'>{contactContent?.formLabelEmail}</FormLabel>
                 <FormControl>
-                  <Input placeholder={contactContent?.formEmail} {...field} className='border-green-400 text-green-400 placeholder:text-green-400/50 h-10 bg-black' />
+                  <Input placeholder={contactContent?.formEmail} {...field} className='text-[0.75rem] md:text-[1rem] border-green-400 text-green-400 placeholder:text-green-400/50 h-10 bg-black' />
                 </FormControl>
                   {form.formState.errors.email && <p className='font-bold text-red-400 text-sm pt-1 pl-1'>{contactContent?.formEmailError}</p>}
               </FormItem>
@@ -78,13 +78,13 @@ const ContactForm = ({ contactContent }: { contactContent: PortfolioContent['con
             <FormItem className='w-full'>
               <FormLabel className='text-green-400 pl-2 text-[1rem] font-[Orbitron]'>{contactContent?.formLabelMessage}</FormLabel>
                 <FormControl>
-                <Textarea placeholder={contactContent?.formMessage} {...field} className='border-green-400 text-green-400 placeholder:text-green-400/50 h-52 md:h-40 bg-black' />
+                <Textarea placeholder={contactContent?.formMessage} {...field} className='text-[0.75rem] md:text-[1rem] border-green-400 text-green-400 placeholder:text-green-400/50 h-52 md:h-40 bg-black' />
               </FormControl>
                 {form.formState.errors.message && <p className='font-bold text-red-400 text-sm pt-1 pl-1'>{contactContent?.formMessageError}</p>}
             </FormItem>
           )}
         />
-        <Button type="submit" className='w-fit p-6 text-2xl bg-transparent border border-green-400 text-green-400 hover:bg-green-400 hover:text-black transition-all duration-300 ease-in-out hover:cursor-pointer font-[Orbitron]'>{contactContent?.formButton}</Button>
+        <Button type="submit" className='w-fit p-6 text-lg md:text-2xl bg-transparent border border-green-400 text-green-400 hover:bg-green-400 hover:text-black transition-all duration-300 ease-in-out hover:cursor-pointer font-[Orbitron]'>{contactContent?.formButton}</Button>
       </form>
     </Form>
   )
