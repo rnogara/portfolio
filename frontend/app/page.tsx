@@ -28,7 +28,7 @@ export default function Home() {
     ) : (
     <div className="relative overflow-hidden w-full">
       <Background bgUrls={bgUrls} />
-      <main className="flex flex-col gap-10 items-center justify-center">
+      <main className="flex flex-col gap-10 items-center justify-center text-gray-200">
         <LanguageBtn />
         <HomeContent homeContent={content.home} />
         <About aboutContent={content.about} />
