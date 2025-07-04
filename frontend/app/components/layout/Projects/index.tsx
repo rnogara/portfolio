@@ -10,7 +10,7 @@ const Projects = ({title}: {title: string}) => {
   const sortedProjects = projects.sort((a, b) => b.rate - a.rate);
   const projectQuantity = sortedProjects.length;
   return (
-    <div className='w-[80%] h-[100vh] flex flex-col gap-4 items-center justify-center z-10 mt-20'>
+    <div className='w-[70%] h-[100vh] flex flex-col gap-4 items-center justify-center z-10 mt-20'>
       <Heading level={2}>{title}</Heading>
       <Carousel
         opts={{
@@ -28,14 +28,8 @@ const Projects = ({title}: {title: string}) => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        {
-          projectQuantity > 3 && (
-            <>
-              <CarouselPrevious className='hidden md:block' />
-              <CarouselNext className='hidden md:block' />
-            </>
-          )
-        }
+        <CarouselPrevious/>
+        <CarouselNext/>
       </Carousel>
     </div>
   )
