@@ -9,6 +9,7 @@ import About from './components/layout/About';
 import Projects from './components/layout/Projects';
 import Skills from './components/layout/Skills';
 import Contact from './components/layout/Contact';
+import Menu from './components/layout/Menu';
 
 export default function Home() {
   const { content } = usePortfolio();
@@ -28,7 +29,8 @@ export default function Home() {
     ) : (
     <div className="relative overflow-hidden w-full">
       <Background bgUrls={bgUrls} />
-      <main className="flex flex-col gap-10 items-center justify-center text-gray-200">
+      <main className="text-gray-200">
+        <Menu menuContent={content.menu} />
         <LanguageBtn />
         <HomeContent homeContent={content.home} />
         <About aboutContent={content.about} />
