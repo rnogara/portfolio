@@ -10,7 +10,7 @@ const Projects = ({title}: {title: string}) => {
   const sortedProjects = projects.sort((a, b) => b.rate - a.rate);
   const projectQuantity = sortedProjects.length;
   return (
-    <div className='w-[70%] h-[100vh] flex flex-col gap-4 items-center justify-center z-10 mt-20'>
+    <div id={title.toLowerCase()} className='w-[70%] h-[100vh] flex flex-col gap-4 items-center justify-center z-10 mt-20 mx-auto'>
       <Heading level={2}>{title}</Heading>
       <Carousel
         opts={{

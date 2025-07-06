@@ -11,7 +11,7 @@ const About = ({ aboutContent }: { aboutContent: PortfolioContent['about'] }) =>
     !aboutContent ? (
       <div>...</div>
     ) : (
-      <div className='w-full h-[80vh] flex flex-col items-center justify-center mt-40 mb-20'>
+      <div id={aboutContent.title.toLowerCase()} className='w-full h-[80vh] flex flex-col items-center justify-center mt-40 mb-20'>
         <Heading level={2} className='mb-20'>{aboutContent.title}</Heading>
         <div className='w-full h-fit flex flex-col gap-8 md:flex-row justify-evenly items-center text-gray-200'>
           <Dialog>

@@ -10,7 +10,7 @@ const Skills = ({ skillsContent }: { skillsContent: PortfolioContent['skills']})
   const cards = tech && tools ? [...tech, ...tools] : [];
 
   return (
-    <div className='p-10 w-full h-fit flex flex-col gap-10'>
+    <div id={skillsContent?.title.toLowerCase()} className='p-10 w-full h-fit flex flex-col gap-10'>
       <Heading level={2}>{skillsContent?.title}</Heading>
       <div className='w-full h-fit flex flex-col md:flex-row justify-center gap-10'>
         <div className='flex flex-wrap items-center justify-center gap-5 w-full md:max-w-[50%]'>
