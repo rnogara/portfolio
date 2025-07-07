@@ -13,9 +13,9 @@ import { cn } from '@/app/lib/utils';
 import { toast } from 'sonner';
 
 const formSchema = z.object({
-  name: z.string().min(2, { message: 'O nome deve ter pelo menos 2 caracteres' }).max(100),
-  email: z.string().email({ message: 'Por favor, insira um e-mail válido' }),
-  message: z.string().min(10, { message: 'A mensagem deve ter pelo menos 10 caracteres' }).max(1000),
+  name: z.string().min(2, { message: 'Name must be at least 2 characters long' }).max(100),
+  email: z.string().email({ message: 'Please enter a valid email' }),
+  message: z.string().min(10, { message: 'Message must be at least 10 characters long' }).max(1000),
 });
 
 const ContactForm = ({ contactContent }: { contactContent: PortfolioContent['contact'] }) => {
@@ -81,7 +81,7 @@ const ContactForm = ({ contactContent }: { contactContent: PortfolioContent['con
                     className='bg-gray-200/60 dark:bg-black/60 border-gray-300 dark:border-green-400 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-green-400 focus:border-transparent'
                   />
                 </FormControl>
-                <FormMessage className='text-xs text-red-500 dark:text-red-400' />
+                <FormMessage className='text-xs text-red-500 dark:text-red-400'>{contactContent?.formNameError}</FormMessage>
               </FormItem>
             )}
           />
@@ -102,7 +102,7 @@ const ContactForm = ({ contactContent }: { contactContent: PortfolioContent['con
                     className='bg-gray-200/60 dark:bg-black/60 border-gray-300 dark:border-green-400 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-green-400 focus:border-transparent'
                   />
                 </FormControl>
-                <FormMessage className='text-xs text-red-500 dark:text-red-400' />
+                <FormMessage className='text-xs text-red-500 dark:text-red-400'>{contactContent?.formEmailError}</FormMessage>
               </FormItem>
             )}
           />
@@ -124,7 +124,7 @@ const ContactForm = ({ contactContent }: { contactContent: PortfolioContent['con
                   className='bg-gray-200/60 dark:bg-black/60 border-gray-300 dark:border-green-400 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-green-400 focus:border-transparent resize-none'
                 />
               </FormControl>
-              <FormMessage className='text-xs text-red-500 dark:text-red-400' />
+              <FormMessage className='text-xs text-red-500 dark:text-red-400'>{contactContent?.formMessageError}</FormMessage>
             </FormItem>
           )}
         />
