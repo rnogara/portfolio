@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Orbitron, Metamorphous, Jura } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
+import { Toaster } from "./components/ui/sonner";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({
       >
         <Providers>
           {children}
+          <Toaster />
         </Providers>
       </body>
     </html>

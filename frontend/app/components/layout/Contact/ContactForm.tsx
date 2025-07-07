@@ -10,6 +10,7 @@ import { Textarea } from '../../ui/textarea';
 import { useState } from 'react';
 import { Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import { cn } from '@/app/lib/utils';
+import { toast } from 'sonner';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'O nome deve ter pelo menos 2 caracteres' }).max(100),
@@ -47,13 +48,15 @@ const ContactForm = ({ contactContent }: { contactContent: PortfolioContent['con
         form.reset();
         setSubmitStatus('success');
         setTimeout(() => setSubmitStatus(null), 5000);
+        toast.success(contactContent?.formSuccess);
       } else {
-        throw new Error('Falha ao enviar mensagem');
+        toast.error(contactContent?.formError);
       }
     } catch (error) {
       console.error('Erro ao enviar mensagem:', error);
       setSubmitStatus('error');
       setTimeout(() => setSubmitStatus(null), 5000);
+      toast.error(contactContent?.formError);
     } finally {
       setIsSubmitting(false);
     }
