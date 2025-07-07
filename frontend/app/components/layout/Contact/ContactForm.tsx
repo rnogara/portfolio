@@ -81,7 +81,7 @@ const ContactForm = ({ contactContent }: { contactContent: PortfolioContent['con
                     className='bg-gray-200/60 dark:bg-black/60 border-gray-300 dark:border-green-400 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-green-400 focus:border-transparent'
                   />
                 </FormControl>
-                <FormMessage className='text-xs text-red-500 dark:text-red-400'>{contactContent?.formNameError}</FormMessage>
+                <FormMessage className='text-xs pl-1 text-red-500 dark:text-red-400'>{contactContent?.formNameError}</FormMessage>
               </FormItem>
             )}
           />
@@ -102,7 +102,7 @@ const ContactForm = ({ contactContent }: { contactContent: PortfolioContent['con
                     className='bg-gray-200/60 dark:bg-black/60 border-gray-300 dark:border-green-400 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-green-400 focus:border-transparent'
                   />
                 </FormControl>
-                <FormMessage className='text-xs text-red-500 dark:text-red-400'>{contactContent?.formEmailError}</FormMessage>
+                <FormMessage className='text-xs pl-1 text-red-500 dark:text-red-400'>{contactContent?.formEmailError}</FormMessage>
               </FormItem>
             )}
           />
@@ -124,7 +124,7 @@ const ContactForm = ({ contactContent }: { contactContent: PortfolioContent['con
                   className='bg-gray-200/60 dark:bg-black/60 border-gray-300 dark:border-green-400 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-green-400 focus:border-transparent resize-none'
                 />
               </FormControl>
-              <FormMessage className='text-xs text-red-500 dark:text-red-400'>{contactContent?.formMessageError}</FormMessage>
+              <FormMessage className='text-xs pl-1 text-red-500 dark:text-red-400'>{contactContent?.formMessageError}</FormMessage>
             </FormItem>
           )}
         />
