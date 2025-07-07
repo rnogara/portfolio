@@ -27,8 +27,8 @@ const ProjectCard = ({project}: {project: ProjectType}) => {
         ))}
       </ul>
       <Dialog>
-        <DialogTrigger className='font-[Jura] text-[1rem] font-bold md:text-xl text-shadow-md text-gray-200 hover:text-green-400 transition-colors cursor-pointer hover:underline'>{moreBtn}</DialogTrigger>
-        <DialogContent className='h-[90%] overflow-y-auto bg-gray-200'>
+        <DialogTrigger className='font-[Jura] text-[1rem] font-bold md:text-xl text-shadow-md hover:text-green-400 transition-colors cursor-pointer hover:underline'>{moreBtn}</DialogTrigger>
+        <DialogContent className='h-[90%] overflow-y-auto text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-800'>
           <DialogHeader>
             <DialogTitle className='font-[Orbitron] text-[1rem] md:text-[1.5rem] lg:text-[2rem] text-shadow-md font-bold'>{title}</DialogTitle>
           </DialogHeader>

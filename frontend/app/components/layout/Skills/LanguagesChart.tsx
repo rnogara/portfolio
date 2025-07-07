@@ -30,7 +30,7 @@ const LanguagesChart = ({title} : {title?: string}) => {
 
   return (
     <div className='w-full sm:w-[50%] lg:w-[40%] xl:w-[30%]'>
-      <Card data-chart={id} className="flex flex-col bg-black/60 text-gray-200">
+      <Card data-chart={id} className="flex flex-col backdrop-blur-sm bg-white/60 dark:bg-black/60 text-gray-900 dark:text-gray-200">
         <ChartStyle id={id} config={chartConfig} />
         <CardHeader>
           <CardTitle className='text-2xl lg:text-3xl text-center'>{title}</CardTitle>

@@ -14,10 +14,10 @@ const LanguageBtn = () => {
     );
   }
 
-  const languageOptions = languages.filter((language: Language) => language.language !== currentLanguage);
-  const currentLanguageData = languages.find((language: Language) => language.language === currentLanguage);
+  const languageOptions = languages?.filter((language: Language) => language.language !== currentLanguage);
+  const currentLanguageData = languages?.find((language: Language) => language.language === currentLanguage);
 
-  if (languages.length === 0 || !currentLanguageData) {
+  if (!languages || languages.length === 0 || !currentLanguageData) {
     console.warn('No languages available or current language not found');
     return null;
   }
@@ -39,15 +39,15 @@ const LanguageBtn = () => {
           <Image width={240} height={240} src={currentIcon} alt={`A flag corresponding to ${currentLanguage}`} />
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          className="overflow-y-auto bg-transparent min-w-auto"
+          className="overflow-y-auto bg-transparent min-w-auto border-none shadow-none"
           align="end"
           sideOffset={8}
         >
-          {languageOptions.map((language: Language) => (
+          {languageOptions?.map((language: Language) => (
             <DropdownMenuItem 
               key={language.language} 
               onClick={() => refreshContent(language.language)}
-              className="p-0 md:p-2"
+              className="p-0 md:p-2 rounded-full"
             >
               <Image 
                 width={40} 

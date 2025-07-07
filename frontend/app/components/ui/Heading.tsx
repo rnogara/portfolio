@@ -8,7 +8,7 @@ interface HeadingProps {
 }
 
 const Heading = ({level, children, className}: HeadingProps) => {
-  const style = 'text-center text-[2rem] md:text-[3rem] lg:text-[4rem] font-[Orbitron] text-shadow-xl text-gray-200 mb-10'
+  const style = 'text-center text-[2rem] md:text-[3rem] lg:text-[4rem] font-[Orbitron] text-shadow-xl text-gray-200 mb-10 text-gray-200'
   return (
     level === 1 ? (<h1
     className={cn(style, className)}
