@@ -2,6 +2,7 @@
 import React from 'react';
 import Background from './components/templates/Background';
 import LanguageBtn from './components/templates/LanguageBtn';
+import ThemeToggle from './components/templates/ThemeToggle';
 import { usePortfolio } from '@/app/context/PortfolioContext';
 import HomeContent from './components/layout/HomeContent';
 import Typewriter from './components/ui/Typewriter';
@@ -31,6 +32,7 @@ export default function Home() {
       <Background bgUrls={bgUrls} />
       <main className="text-gray-200">
         <Menu menuContent={content.menu} />
+        <ThemeToggle />
         <LanguageBtn />
         <HomeContent homeContent={content.home} />
         <About aboutContent={content.about} />

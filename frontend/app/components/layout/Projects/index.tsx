@@ -9,29 +9,42 @@ const Projects = ({title}: {title: string}) => {
   const { projects } = usePortfolio();
   const sortedProjects = projects.sort((a, b) => b.rate - a.rate);
   const projectQuantity = sortedProjects.length;
+  
   return (
-    <div id={title.toLowerCase()} className='w-full h-[100vh] flex flex-col gap-4 items-center justify-center z-10 mt-20'>
-      <Heading level={2}>{title}</Heading>
-      <Carousel
-        opts={{
-          loop: true,
-          align: 'center',
-        }}
-        plugins={[
-          Autoplay({ delay: 2000, stopOnInteraction: true }),
-        ]}
-        className='w-[70%]'
-      >
-        <CarouselContent>
-          {projectQuantity > 0 && sortedProjects.map((project) => (
-            <CarouselItem className="min-w-[100%] md:min-w-[10%] md:basis-1/2 lg:basis-1/3 max-w-[50%]" key={project.id}>
-              <ProjectCard project={project} />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious/>
-        <CarouselNext/>
-      </Carousel>
+    <div id={title.toLowerCase()} className='w-full min-h-screen py-20 px-4 sm:px-6 lg:px-8'>
+      <div className='max-w-7xl mx-auto'>
+        <Heading level={2} className='text-center mb-12 md:mb-16'>{title}</Heading>
+        
+        {projectQuantity > 0 ? (
+          <div className='relative'>
+            <Carousel
+              opts={{
+                loop: true,
+                align: 'start',
+              }}
+              plugins={[
+                Autoplay({ delay: 5000, stopOnInteraction: true }),
+              ]}
+              className='w-full px-8 md:px-12'
+            >
+              <CarouselContent className='-ml-4 py-4'>
+                {sortedProjects.map((project) => (
+                  <CarouselItem key={project.id} className="pl-4 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                    <ProjectCard project={project} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              
+              <CarouselPrevious className='left-0 h-10 w-10 rounded-full bg-white/80 dark:bg-black/80 border-2 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100 hover:border-green-400 hover:text-green-400 dark:hover:border-green-400 dark:hover:text-green-400 cursor-pointer transition-colors' />
+              <CarouselNext className='right-0 h-10 w-10 rounded-full bg-white/80 dark:bg-black/80 border-2 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100 hover:border-green-400 hover:text-green-400 dark:hover:border-green-400 dark:hover:text-green-400 cursor-pointer transition-colors' />
+            </Carousel>
+          </div>
+        ) : (
+          <div className='text-center py-12'>
+            <p className='text-gray-600 dark:text-gray-400'>Nenhum projeto disponível no momento.</p>
+          </div>
+        )}
+      </div>
     </div>
   )
 }

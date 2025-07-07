@@ -1,21 +1,25 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React from 'react'
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Form, FormControl, FormField, FormItem, FormLabel } from '../../ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form';
 import { PortfolioContent } from '@/app/types';
 import { Button } from '../../ui/button';
 import { Input } from '../../ui/input';
 import { Textarea } from '../../ui/textarea';
+import { useState } from 'react';
+import { Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
+import { cn } from '@/app/lib/utils';
 
 const formSchema = z.object({
-  name: z.string().min(2).max(100),
-  email: z.string().email().nonempty(),
-  message: z.string().min(10).max(1000),
-})
+  name: z.string().min(2, { message: 'O nome deve ter pelo menos 2 caracteres' }).max(100),
+  email: z.string().email({ message: 'Por favor, insira um e-mail válido' }),
+  message: z.string().min(10, { message: 'A mensagem deve ter pelo menos 10 caracteres' }).max(1000),
+});
 
 const ContactForm = ({ contactContent }: { contactContent: PortfolioContent['contact'] }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<null | 'success' | 'error'>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -24,70 +28,144 @@ const ContactForm = ({ contactContent }: { contactContent: PortfolioContent['con
       email: '',
       message: '',
     },
-  })
+  });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    const response = await fetch('/api/send/', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    
+    try {
+      const response = await fetch('/api/send/', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-    if (response.ok) {
-      form.reset()
+      if (response.ok) {
+        form.reset();
+        setSubmitStatus('success');
+        setTimeout(() => setSubmitStatus(null), 5000);
+      } else {
+        throw new Error('Falha ao enviar mensagem');
+      }
+    } catch (error) {
+      console.error('Erro ao enviar mensagem:', error);
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus(null), 5000);
+    } finally {
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex flex-col items-center">
-        <div className='flex flex-col md:flex-row gap-4'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
           <FormField
             control={form.control}
-            name="name" 
+            name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className='text-green-400 pl-2 text-[1rem] font-[Orbitron]'>{contactContent?.formLabelName}</FormLabel>
+                <FormLabel className='text-sm md:text-base font-medium text-gray-200 dark:text-green-400'>
+                  {contactContent?.formLabelName}
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder={contactContent?.formName} {...field} className='text-[0.75rem] md:text-[1rem] border-green-400 text-green-400 placeholder:text-green-400/50 h-10 bg-black' />
+                  <Input 
+                    placeholder={contactContent?.formName} 
+                    {...field} 
+                    className='bg-gray-200/60 dark:bg-black/60 border-gray-300 dark:border-green-400 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-green-400 focus:border-transparent'
+                  />
                 </FormControl>
-                {form.formState.errors.name && <p className='font-bold text-red-400 text-sm pt-1 pl-1'>{contactContent?.formNameError}</p>}
+                <FormMessage className='text-xs text-red-500 dark:text-red-400' />
               </FormItem>
             )}
           />
+          
           <FormField
             control={form.control}
-            name="email" 
+            name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className='text-green-400 pl-2 text-[1rem] font-[Orbitron]'>{contactContent?.formLabelEmail}</FormLabel>
+                <FormLabel className='text-sm md:text-base font-medium text-gray-200 dark:text-green-400'>
+                  {contactContent?.formLabelEmail}
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder={contactContent?.formEmail} {...field} className='text-[0.75rem] md:text-[1rem] border-green-400 text-green-400 placeholder:text-green-400/50 h-10 bg-black' />
+                  <Input 
+                    type="email" 
+                    placeholder={contactContent?.formEmail} 
+                    {...field} 
+                    className='bg-gray-200/60 dark:bg-black/60 border-gray-300 dark:border-green-400 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-green-400 focus:border-transparent'
+                  />
                 </FormControl>
-                  {form.formState.errors.email && <p className='font-bold text-red-400 text-sm pt-1 pl-1'>{contactContent?.formEmailError}</p>}
+                <FormMessage className='text-xs text-red-500 dark:text-red-400' />
               </FormItem>
             )}
           />
         </div>
+        
         <FormField
           control={form.control}
           name="message"
           render={({ field }) => (
-            <FormItem className='w-full'>
-              <FormLabel className='text-green-400 pl-2 text-[1rem] font-[Orbitron]'>{contactContent?.formLabelMessage}</FormLabel>
-                <FormControl>
-                <Textarea placeholder={contactContent?.formMessage} {...field} className='text-[0.75rem] md:text-[1rem] border-green-400 text-green-400 placeholder:text-green-400/50 h-52 md:h-40 bg-black' />
+            <FormItem>
+              <FormLabel className='text-sm md:text-base font-medium text-gray-200 dark:text-green-400'>
+                {contactContent?.formLabelMessage}
+              </FormLabel>
+              <FormControl>
+                <Textarea 
+                  placeholder={contactContent?.formMessage} 
+                  rows={5} 
+                  {...field} 
+                  className='bg-gray-200/60 dark:bg-black/60 border-gray-300 dark:border-green-400 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-green-400 focus:border-transparent resize-none'
+                />
               </FormControl>
-                {form.formState.errors.message && <p className='font-bold text-red-400 text-sm pt-1 pl-1'>{contactContent?.formMessageError}</p>}
+              <FormMessage className='text-xs text-red-500 dark:text-red-400' />
             </FormItem>
           )}
         />
-        <Button type="submit" className='w-fit p-6 text-lg md:text-2xl bg-transparent border border-green-400 text-green-400 hover:bg-green-400 hover:text-black transition-all duration-300 ease-in-out hover:cursor-pointer font-[Orbitron]'>{contactContent?.formButton}</Button>
+        
+        <div className='flex items-center justify-between pt-2'>
+          <div className='text-sm text-gray-500 dark:text-gray-400'>
+            {submitStatus === 'success' && (
+              <div className='flex items-center space-x-2 text-green-600 dark:text-green-400'>
+                <CheckCircle2 className='w-5 h-5' />
+                <span>{contactContent?.formSuccess}</span>
+              </div>
+            )}
+            {submitStatus === 'error' && (
+              <div className='flex items-center space-x-2 text-red-600 dark:text-red-400'>
+                <AlertCircle className='w-5 h-5' />
+                <span>{contactContent?.formError}</span>
+              </div>
+            )}
+          </div>
+          
+          <Button 
+            type="submit" 
+            disabled={isSubmitting}
+            className={cn(
+              'p-4 md:p-6 text-[1rem] md:text-[1.2rem] lg:text-[1.5rem] font-[Jura] font-bold rounded-lg transition-colors',
+              'bg-transparent border border-green-400 dark:border-green-400 hover:bg-green-400 text-green-400 hover:text-gray-800 dark:text-green-400 dark:hover:text-gray-900',
+              'dark:bg-transparent dark:hover:bg-green-400 ',
+              'focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900',
+              'disabled:opacity-70 disabled:cursor-not-allowed mx-auto'
+            )}
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                {'...'}
+              </>
+            ) : (
+              contactContent?.formButton 
+            )}
+          </Button>
+        </div>
       </form>
     </Form>
-  )
-}
+  );
+};
 
-export default ContactForm
+export default ContactForm;

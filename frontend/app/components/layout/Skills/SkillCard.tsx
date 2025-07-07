@@ -10,20 +10,29 @@ const SkillCard = ({ skill } : { skill: string}) => {
 
   return (
     <div className='group aspect-square [perspective:1000px] w-16 lg:w-20' title={skill}>
-      <div className='relative h-full w-full transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] flex flex-col justify-center items-center gap-5'>
+      <div className='relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]'>
         {/* Front face */}
-        <div className='absolute flex items-center w-16 lg:w-20 h-16 lg:h-20 justify-center rounded-lg border border-gray-700 bg-black/50 p-4 [backface-visibility:hidden]'>
+        <div className='absolute inset-0 flex flex-col items-center justify-center rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white/30 dark:bg-black/50 p-4 [backface-visibility:hidden] shadow-md hover:shadow-lg transition-all duration-300 backdrop-blur-sm'>
           {loading ? (
-            <div className="h-16 w-16 animate-pulse rounded-md bg-gray-700"></div>
+            <div className="h-12 w-12 animate-pulse rounded-md bg-gray-300 dark:bg-gray-600"></div>
           ) : iconSvg ? (
-            <Image src={iconSvg} alt={skill} width={50} height={50} className='drop-shadow-[0_0_5px_rgba(255,255,255,0.3)] transition-all duration-500 group-hover:drop-shadow-none' />
+            <div className='relative h-12 w-12 flex items-center justify-center'>
+              <Image 
+                src={iconSvg} 
+                alt={skill} 
+                width={48} 
+                height={48} 
+                className='w-full h-full object-contain transition-transform duration-300 group-hover:scale-110'
+              />
+            </div>
           ) : (
-            <p className='text-center text-gray-200'>{skill}</p>
+            <p className='text-center text-gray-900 dark:text-gray-100 font-medium'>{skill}</p>
           )}
         </div>
+        
         {/* Back face */}
-        <div className='absolute flex h-full w-full items-center justify-center rounded-lg border border-gray-700 bg-black/80 p-4 [transform:rotateY(180deg)] [backface-visibility:hidden]'>
-          <p className='text-center text-gray-200'>{skill}</p>
+        <div className='absolute inset-0 flex items-center justify-center rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-black/80 p-4 [transform:rotateY(180deg)] [backface-visibility:hidden] shadow-lg'>
+          <p className='text-center font-medium text-gray-900 dark:text-gray-100'>{skill}</p>
         </div>
       </div>
     </div>
