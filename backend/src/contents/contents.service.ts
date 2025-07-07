@@ -16,6 +16,8 @@ export class ContentsService {
         menu: true,
         projects: true,
         icon: true,
+        errorPage: true,
+        error404: true,
         about: {
           include: {
             experience: true,

@@ -32,6 +32,8 @@ model PortfolioContent {
   menu     String[]
   projects String
   icon     String
+  error404 String[]
+  errorPage String[]
   
   // Relacionamentos
   about    PortfolioContentAbout?   @relation(fields: [aboutId], references: [id])

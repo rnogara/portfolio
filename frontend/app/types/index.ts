@@ -36,6 +36,8 @@ export interface PortfolioContent {
   menu: string[];
   projects: string;
   icon: string;
+  error404: string[];
+  errorPage: string[];
   about?: {
     title: string;
     educationBtn: string;
