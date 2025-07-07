@@ -3,6 +3,7 @@ import { Orbitron, Metamorphous, Jura } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
 import { Toaster } from "./components/ui/sonner";
+import { Analytics } from "@vercel/analytics/next";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -15,9 +16,19 @@ const jura = Jura({
   subsets: ["latin"],
 });
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Portfolio of Roberta Nogara",
+  title: "Roberta Nogara - Portfolio",
+  description: "Portfolio of Roberta Nogara a Full Stack Developer",
+  icons: [{
+    rel: "icon",
+    url: "/favicon.png",
+  }],
+  openGraph: {
+    title: "Roberta Nogara - Portfolio",
+    description: "Portfolio of Roberta Nogara a Full Stack Developer",
+    images: [{ url: "/og-image.png" }],
+  },
 };
+
 
 export default function RootLayout({
   children,
@@ -32,6 +43,7 @@ export default function RootLayout({
         <Providers>
           {children}
           <Toaster />
+          <Analytics />
         </Providers>
       </body>
     </html>
