@@ -28,6 +28,14 @@ const LanguagesChart = ({title} : {title?: string}) => {
     fill: lang.color,
   }));
 
+  const chartPayload = chartData.map((lang) => ({
+    name: lang.name,
+    value: lang.hours,
+    payload: lang,
+    color: lang.fill,
+    dataKey: lang.name,
+  }));
+
   return (
     <div className='w-full sm:w-[50%] lg:w-[40%] xl:w-[30%]'>
       <Card data-chart={id} className="flex flex-col backdrop-blur-sm bg-white/60 dark:bg-black/60 text-gray-900 dark:text-gray-200">
@@ -44,12 +52,12 @@ const LanguagesChart = ({title} : {title?: string}) => {
             <PieChart>
               <ChartLegend
                 verticalAlign='bottom'
-                content={<ChartLegendContent nameKey="name" payload={chartData}/>}
+                content={<ChartLegendContent nameKey="name" payload={chartPayload}/>}
                 className="flex-wrap gap-2 lg:text-[1.2rem] *:basis-1/4 *:justify-center"
               />
               <ChartTooltip
                 cursor={false}
-                content={<ChartTooltipContent hideLabel />}
+                content={<ChartTooltipContent />}
               />
               <Pie
                 data={chartData}
