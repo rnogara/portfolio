@@ -3,10 +3,10 @@ import React from 'react';
 import Image from 'next/image';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { usePortfolio } from '../../context/PortfolioContext';
-import { Language } from '../../types';
+import { PortfolioContent } from '../../types';
 
 const LanguageBtn = () => {
-  const { languages, refreshContent, loading, currentLanguage } = usePortfolio();
+  const { contents, refreshContent, loading, currentLanguage } = usePortfolio();
 
   if (loading) {
     return (
@@ -14,10 +14,10 @@ const LanguageBtn = () => {
     );
   }
 
-  const languageOptions = languages?.filter((language: Language) => language.language !== currentLanguage);
-  const currentLanguageData = languages?.find((language: Language) => language.language === currentLanguage);
+  const languageOptions = contents?.filter((language: PortfolioContent) => language.language !== currentLanguage);
+  const currentLanguageData = contents?.find((language: PortfolioContent) => language.language === currentLanguage);
 
-  if (!languages || languages.length === 0 || !currentLanguageData) {
+  if (!contents || contents.length === 0 || !currentLanguageData) {
     console.warn('No languages available or current language not found');
     return null;
   }
@@ -43,7 +43,7 @@ const LanguageBtn = () => {
           align="end"
           sideOffset={8}
         >
-          {languageOptions?.map((language: Language) => (
+          {languageOptions?.map((language: PortfolioContent) => (
             <DropdownMenuItem 
               key={language.language} 
               onClick={() => refreshContent(language.language)}

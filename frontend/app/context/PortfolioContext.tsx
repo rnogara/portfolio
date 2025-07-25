@@ -1,8 +1,8 @@
 'use client';
 
 import { createContext, useContext, ReactNode, useState, useEffect } from 'react';
-import { Language, PortfolioContent, Project, SvglApiResponse, WakaTimeLanguage } from '@/app/types';
-import { api } from '@/app/lib/api';
+import { PortfolioContent, Project, SvglApiResponse, WakaTimeLanguage } from '@/app/types';
+import { api, ContentsService, ProjectService } from '@/app/lib/api';
 import { detectUserLanguage } from '@/app/services/languageDetector';
 import fetchJsonp from 'fetch-jsonp';
 import { useTheme } from './theme';
@@ -10,8 +10,8 @@ import { useTheme } from './theme';
 interface PortfolioContextType {
   content: PortfolioContent | undefined;
   wakaTimeData: WakaTimeLanguage[];
-  languages: Language[] | undefined;
   projects: Project[];
+  contents: PortfolioContent[];
   skillIcons: Map<string, string | null>;
   loading: boolean;
   error: string | null;
@@ -25,22 +25,22 @@ const PortfolioContext = createContext<PortfolioContextType | undefined>(undefin
 export function PortfolioProvider({ children }: { children: ReactNode }) {
   const [content, setContent] = useState<PortfolioContent>();
   const [projects, setProjects] = useState<Project[]>([]);
+  const [contents, setContents] = useState<PortfolioContent[]>([]);
   const [skillIcons, setSkillIcons] = useState<Map<string, string>>(new Map());
   const [wakaTimeData, setWakaTimeData] = useState<WakaTimeLanguage[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [languages, setLanguages] = useState<Language[]>();
   const [currentLanguage, setCurrentLanguage] = useState<string>('');
   const { theme } = useTheme();
 
-  const fetchLanguages = async () => {
+  const fetchAllContents = async () => {
     try {
       setLoading(true);
-      const response = await api.get<Language[]>('/contents');
-      setLanguages(response.data);
+      const response = await ContentsService.getAllContents();
+      setContents(response);
     } catch (err) {
-      setError('Failed to fetch languages');
-      console.error('Error fetching languages:', err);
+      setError('Failed to fetch contents');
+      console.error('Error fetching contents:', err);
     } finally {
       setLoading(false);
     }
@@ -49,10 +49,10 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   const fetchContent = async (language: string) => {
     try {
       setLoading(true);
-      const response = await api.get<PortfolioContent>(`/contents/${language}`);
-      setContent(response.data);
+      const response = await ContentsService.getContent(language);
+      setContent(response);
       setCurrentLanguage(language);
-      return response.data;
+      return response;
     } catch (err) {
       setError('Failed to fetch portfolio data');
       console.error('Error fetching portfolio:', err);
@@ -81,9 +81,9 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
 
   const fetchProjects = async () => {
     try {
-      setLoading(true);
-      const response = await api.get<Project[]>('/projects');
-      setProjects(response.data);
+      setLoading(true); 
+      const response = await ProjectService.getAllProjects();
+      setProjects(response);
     } catch (err) {
       setError('Failed to fetch projects');
       console.error('Error fetching projects:', err);
@@ -141,9 +141,9 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
         if (initialContent) {
             await Promise.all([
                 fetchProjects(),
-                fetchLanguages(),
                 fetchWakaTimeData(),
                 fetchAllSkillIcons(),
+                fetchAllContents(),
             ]);
         }
 
@@ -154,7 +154,7 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
         // Fallback to English in case of error
         const fallbackContent = await fetchContent('en')
         if(fallbackContent) {
-            await Promise.all([fetchProjects(), fetchLanguages(), fetchWakaTimeData(), fetchAllSkillIcons()]);
+            await Promise.all([fetchProjects(), fetchWakaTimeData(), fetchAllSkillIcons(), fetchAllContents()]);
         }
       } finally {
         setLoading(false);
@@ -176,10 +176,10 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
     <PortfolioContext.Provider
       value={{
         content,
+        contents,
         wakaTimeData,
         skillIcons,
         projects,
-        languages,
         loading,
         error,
         currentLanguage,

@@ -20,6 +20,27 @@ api.interceptors.response.use(
   }
 );
 
+export class AuthService {
+  static async login(username: string, password: string): Promise<boolean> {
+    const response = await api.post('/auth/login', { username, password }, { withCredentials: true });
+    return response.status === 200;
+  }
+
+  static async logout(): Promise<void> {
+    await api.post('/auth/logout');
+  }
+
+  static async isAuthenticated(): Promise<boolean> {
+    try {
+      const response = await api.get('/auth/check');
+      return response.data.isAuthenticated;
+    } catch (error) {
+      console.error('Error checking authentication:', error);
+      return false;
+    }
+  }
+}
+
 export class ProjectService {
   static async getAllProjects(): Promise<Project[]> {
     const response = await api.get('/projects');
@@ -67,6 +88,11 @@ export class ProjectService {
 export class ContentsService {
   static async getContent(language: string = 'pt-BR'): Promise<PortfolioContent> {
     const response = await api.get(`/contents/${language}`);
+    return response.data;
+  }
+
+  static async getAllContents(): Promise<PortfolioContent[]> {
+    const response = await api.get('/contents');
     return response.data;
   }
 

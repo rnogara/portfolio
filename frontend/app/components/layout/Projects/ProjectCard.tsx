@@ -18,8 +18,8 @@ const ProjectCard = ({project}: {project: ProjectType}) => {
       <h2 className='font-[Orbitron] text-[1.2rem] md:text-[1.5rem] lg:text-[2rem] text-shadow-md font-bold'>{title}</h2>
       <Image src={project.imageUrl} alt={title} width={1434} height={747} className='w-[50%] lg:w-full h-auto'/>
       <div className='flex justify-evenly w-full items-center'>
-        <a href={project.siteUrl} target="_blank" rel="noopener noreferrer" className='hover:text-green-400 transition-colors cursor-pointer'><Link className='md:w-8 md:h-8' /></a>
-        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className='hover:text-green-400 transition-colors cursor-pointer'><Github className='md:w-8 md:h-8' /></a>
+        {project.siteUrl && <a href={project.siteUrl} target="_blank" rel="noopener noreferrer" className='hover:text-green-400 transition-colors cursor-pointer'><Link className='md:w-8 md:h-8' /></a>}
+        {project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className='hover:text-green-400 transition-colors cursor-pointer'><Github className='md:w-8 md:h-8' /></a>}
       </div>
       <ul className='flex flex-wrap gap-2 md:gap-6 max-w-[80%]'>
         {project.technologies.map((technology, index) => (

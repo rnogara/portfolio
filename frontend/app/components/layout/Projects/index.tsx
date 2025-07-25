@@ -29,7 +29,7 @@ const Projects = ({title}: {title: string}) => {
             >
               <CarouselContent className='-ml-4 py-4'>
                 {sortedProjects.map((project) => (
-                  <CarouselItem key={project.id} className="pl-4 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                  <CarouselItem key={project.id} className="pl-4 sm:basis-1/2 lg:basis-1/3">
                     <ProjectCard project={project} />
                   </CarouselItem>
                 ))}
