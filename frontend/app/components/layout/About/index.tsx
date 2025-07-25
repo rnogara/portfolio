@@ -1,12 +1,12 @@
 import React from 'react';
-import { PortfolioContent } from '../../../types';
+import { About as AboutType } from '../../../types';
 import Education from './Education';
 import Experience from './Experience';
 import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle } from '../../ui/dialog';
 import DownloadCV from './DownloadCV';
 import Heading from '../../ui/Heading';
 
-const About = ({ aboutContent }: { aboutContent: PortfolioContent['about'] }) => {
+const About = ({ aboutContent }: { aboutContent: AboutType }) => {
   return (
     !aboutContent ? (
       <div>...</div>

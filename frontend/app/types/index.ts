@@ -28,7 +28,63 @@ export interface CreateProjectDto {
   siteUrl?: string;
   rate: number;
 }
+export interface Contact {
+  id?: string;
+  title: string;
+  formName: string;
+  formEmail: string;
+  formMessage: string;
+  formButton: string;
+  formSuccess: string;
+  formError: string;
+  formLabelName: string;
+  formLabelEmail: string;
+  formLabelMessage: string;
+  formNameError: string;
+  formEmailError: string;
+  formMessageError: string;
+  github: string;
+  linkedin: string;
+  email: string;
+  phone: string;
+}
 
+export interface Skill {
+  id?: string;
+  title: string;
+  tech: string[];
+  tools: string[];
+  concepts: string[];
+  soft: string[];
+  chartTitle: string;
+}
+export interface Experience {
+  id?: string;
+  company: string;
+  title: string;
+  periodStart: string;
+  periodEnd: string;
+  description: string;
+}
+
+export interface Education {
+  id?: string;
+  institution: string;
+  degree: string;
+  periodStart: string;
+  periodEnd: string;
+  relevant: string[];
+}
+export interface About  {
+  id?: string;
+  title: string;
+  educationBtn: string;
+  experienceBtn: string;
+  cvUrl: string;
+  cvBtn: string;
+  education: Education[];
+  experience: Experience[];
+}
 export interface PortfolioContent {
   id: string;
   language: string;
@@ -38,65 +94,9 @@ export interface PortfolioContent {
   icon: string;
   error404: string[];
   errorPage: string[];
-  about?: {
-    title: string;
-    educationBtn: string;
-    experienceBtn: string;
-    cvUrl: string;
-    cvBtn: string;
-    experience: Experience[];
-    education: Education[];
-  };
-  skills?: {
-    title: string;
-    tech: string[];
-    tools: string[];
-    concepts: string[];
-    soft: string[];
-    chartTitle: string;
-  };
-  contact?: {
-    title: string;
-    formName: string;
-    formEmail: string;
-    formMessage: string;
-    formButton: string;
-    formSuccess: string;
-    formError: string;
-    formLabelName: string;
-    formLabelEmail: string;
-    formLabelMessage: string;
-    formNameError: string;
-    formEmailError: string;
-    formMessageError: string;
-    github: string;
-    linkedin: string;
-    email: string;
-    phone: string;
-  };
-}
-
-export interface Experience {
-  id: string;
-  company: string;
-  title: string;
-  periodStart: string;
-  periodEnd: string;
-  description: string;
-}
-
-export interface Education {
-  id: string;
-  institution: string;
-  degree: string;
-  periodStart: string;
-  periodEnd: string;
-  relevant: string[];
-}
-
-export interface Language {
-  language: string;
-  icon: string;
+  about: About;
+  contact: Contact;
+  skills: Skill;
 }
 
 export interface AdminCredentials {
@@ -139,4 +139,9 @@ export interface SvglApiResponse {
       }
     | string;
   url: string;
+}
+
+export interface User {
+  username: string;
+  password: string;
 }

@@ -32,18 +32,24 @@ export class ContentsController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  async getAllLanguages() {
-    const content = await this.contentsService.getAllLanguages();
-    if (!content) {
+  async getAllContents() {
+    const contents = await this.contentsService.getAllContents();
+    if (!contents) {
       throw new HttpException('Content not found', HttpStatus.NOT_FOUND);
     }
-    return content;
+    return contents;
   }
 
   @Post('')
   @HttpCode(HttpStatus.CREATED)
   @UseGuards(AdminGuard)
   async createContent(@Body() createContentDto: CreateContentDto) {
+    const content = await this.contentsService.getContent(
+      createContentDto.language,
+    );
+    if (content) {
+      throw new HttpException('Content already exists', HttpStatus.BAD_REQUEST);
+    }
     return this.contentsService.createContent(createContentDto);
   }
 
