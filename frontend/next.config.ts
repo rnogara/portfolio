@@ -3,7 +3,6 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: 'standalone',
   images: {
-    unoptimized: true,
     domains: ['img.icons8.com', 'live.staticflickr.com', 'svgl.app'],
     remotePatterns: [
       {
