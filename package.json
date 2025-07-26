@@ -18,8 +18,7 @@
     "test:coverage": "npm run test:frontend -- --coverage && npm run test:backend -- --coverage",
     "test:watch": "npm run test:frontend -- --watch",
     "test:e2e": "cd backend && npm run test:e2e",
-    "lint": "cd frontend && npm run lint && cd ../backend && npm run lint",
-    "postinstall": "cd backend && npm install && cd ../frontend && npm install"
+    "lint": "cd frontend && npm run lint && cd ../backend && npm run lint"
   },
   "engines": {
     "node": ">=18.0.0",
