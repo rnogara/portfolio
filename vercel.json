@@ -2,26 +2,5 @@
   "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "frontend/.next",
-  "installCommand": "npm install",
-  "functions": {
-    "backend/dist/main.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/backend"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/backend/dist/main.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ]
+  "installCommand": "npm install"
 }
