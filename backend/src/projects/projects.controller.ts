@@ -20,13 +20,13 @@ import { UpdateProjectDto } from './dto/update-project.dto';
 export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
-  @Get('projects')
+  @Get()
   @HttpCode(HttpStatus.OK)
   async getAllProjects() {
     return this.projectsService.getAllProjects();
   }
 
-  @Get('projects/:id')
+  @Get(':id')
   @HttpCode(HttpStatus.OK)
   async getProjectById(@Param('id') id: string) {
     const project = await this.projectsService.getProjectById(id);
@@ -36,7 +36,7 @@ export class ProjectsController {
     return project;
   }
 
-  @Post('projects')
+  @Post('')
   @HttpCode(HttpStatus.CREATED)
   @UseGuards(AdminGuard)
   async createProject(@Body() createProjectDto: CreateProjectDto) {
@@ -47,7 +47,7 @@ export class ProjectsController {
     return project;
   }
 
-  @Put('projects/:id')
+  @Put(':id')
   @HttpCode(HttpStatus.OK)
   @UseGuards(AdminGuard)
   async updateProject(
@@ -64,7 +64,7 @@ export class ProjectsController {
     return project;
   }
 
-  @Delete('projects/:id')
+  @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @UseGuards(AdminGuard)
   async deleteProject(@Param('id') id: string) {
