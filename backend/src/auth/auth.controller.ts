@@ -21,6 +21,8 @@ export class AuthController {
   private readonly jwtConstants = {
     secret: process.env.JWT_SECRET,
   };
+  private readonly NODE_ENV = process.env.NODE_ENV;
+  private readonly VERCEL_URL = process.env.VERCEL_URL;
 
   constructor(private readonly jwtService: JwtService) {}
 
@@ -52,9 +54,11 @@ export class AuthController {
 
       res.cookie('auth_token', token, {
         httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
+        secure: this.NODE_ENV === 'production',
+        sameSite: this.NODE_ENV === 'production' ? 'none' : 'lax',
         maxAge: 24 * 60 * 60 * 1000,
+        domain: this.NODE_ENV === 'production' ? this.VERCEL_URL : undefined,
+        path: '/',
       });
 
       return res.status(200).json({ success: true });
@@ -65,7 +69,16 @@ export class AuthController {
 
   @Post('logout')
   logout(@Res() res: Response) {
-    res.clearCookie('auth_token');
+    res.clearCookie('auth_token', {
+      httpOnly: true,
+      secure: this.NODE_ENV === 'production',
+      sameSite: this.NODE_ENV === 'production' ? 'none' : 'lax',
+      domain:
+        this.NODE_ENV === 'production' && this.VERCEL_URL
+          ? this.VERCEL_URL.replace('https://', '').replace('http://', '')
+          : undefined,
+      path: '/',
+    });
     return res.status(200).json({ success: true });
   }
 
