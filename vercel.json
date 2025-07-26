@@ -1,19 +1,6 @@
 {
   "version": 2,
   "buildCommand": "cd backend && npm ci && npm run build && cd ../frontend && npm ci && npm run build",
-  "builds": [
-    {
-      "src": "backend/src/main.ts",
-      "use": "@vercel/node",
-      "config": {
-        "maxLambdaSize": "15mb"
-      }
-    },
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/next"
-    }
-  ],
   "routes": [
     {
       "src": "/api/(.*)",
