@@ -55,7 +55,7 @@ export class AuthController {
       res.cookie('auth_token', token, {
         httpOnly: true,
         secure: this.NODE_ENV === 'production',
-        sameSite: this.NODE_ENV === 'production' ? 'none' : 'lax',
+        sameSite: 'none',
         maxAge: 24 * 60 * 60 * 1000,
         domain: this.NODE_ENV === 'production' ? this.VERCEL_URL : undefined,
         path: '/',
