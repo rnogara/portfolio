@@ -35,6 +35,16 @@ export class SkillsController {
     try {
       const response = await axios.get<SvglApiResponse[]>(
         'https://api.svgl.app',
+        {
+          headers: {
+            'User-Agent':
+              'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+            Accept: 'application/json',
+            'Accept-Language': 'en-US,en;q=0.9',
+            Referer: 'https://svgl.app/',
+          },
+          timeout: 10000, // 10 segundos de timeout
+        },
       );
 
       iconCache = { data: response.data, timestamp: now };

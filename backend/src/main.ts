@@ -16,7 +16,7 @@ async function bootstrap() {
   app.enableCors({
     origin: configService.get<string>('VERCEL_URL'),
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Cookie'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   });
 
