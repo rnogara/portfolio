@@ -27,7 +27,10 @@ const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 horas
 export class SkillsController {
   private async loadLocalIcons(): Promise<SvglApiResponse[]> {
     try {
-      const data = await fs.promises.readFile('sgvl.json', 'utf-8');
+      const data = await fs.promises.readFile(
+        __dirname + '/svgl.json',
+        'utf-8',
+      );
       console.log(data);
       return JSON.parse(data) as SvglApiResponse[];
     } catch (error) {
