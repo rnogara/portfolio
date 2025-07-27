@@ -22,16 +22,18 @@ let iconCache: {
 } | null = null;
 
 const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 horas
-const LOCAL_ICONS_PATH: string = './sgvl.json';
 
 @Controller('skills')
 export class SkillsController {
   private async loadLocalIcons(): Promise<SvglApiResponse[]> {
     try {
-      const data = await fs.promises.readFile(LOCAL_ICONS_PATH, 'utf-8');
+      const data = await fs.promises.readFile('sgvl.json', 'utf-8');
+      console.log(data);
       return JSON.parse(data) as SvglApiResponse[];
     } catch (error) {
-      console.error('Error loading local icons:', error);
+      if (error instanceof Error) {
+        console.error('Error loading local icons:', error.message);
+      }
       throw new HttpException(
         'Failed to load local skill icons',
         HttpStatus.INTERNAL_SERVER_ERROR,
