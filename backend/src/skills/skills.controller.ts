@@ -1,6 +1,7 @@
 import { Controller, Get, HttpException, HttpStatus } from '@nestjs/common';
 import axios from 'axios';
 import fs from 'fs';
+import path from 'path';
 
 interface SvglApiResponse {
   id: number;
@@ -27,11 +28,8 @@ const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 horas
 export class SkillsController {
   private async loadLocalIcons(): Promise<SvglApiResponse[]> {
     try {
-      const data = await fs.promises.readFile(
-        __dirname + '/svgl.json',
-        'utf-8',
-      );
-      console.log(data);
+      const jsonPath = path.join(process.cwd(), 'dist', 'skills', 'svgl.json');
+      const data = await fs.promises.readFile(jsonPath, 'utf-8');
       return JSON.parse(data) as SvglApiResponse[];
     } catch (error) {
       if (error instanceof Error) {
